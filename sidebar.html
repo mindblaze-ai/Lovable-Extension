@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Data Reader</title>
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="sidebar-container">
+        <header class="sidebar-header">
+            <div class="logo-container">
+                <img src="icons/icon32.png" alt="SF Data Reader" class="logo">
+                <h1>SF Data Reader</h1>
+            </div>
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span class="status-text" id="statusText">Connecting...</span>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Authentication Section -->
+            <section class="auth-section" id="authSection">
+                <div class="auth-container">
+                    <h3>Connect to Salesforce</h3>
+                    <p>Please navigate to a Salesforce page to establish connection.</p>
+                    <button id="refreshConnection" class="btn btn-primary">Refresh Connection</button>
+                </div>
+            </section>
+
+            <!-- Main Interface -->
+            <section class="query-section" id="querySection" style="display: none;">
+                <!-- Query Builder -->
+                <div class="section-card">
+                    <h3>SOQL Query Builder</h3>
+                    <div class="query-builder">
+                        <div class="form-group">
+                            <label for="objectSelect">Object:</label>
+                            <select id="objectSelect" class="form-control">
+                                <option value="">Select Object...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="fieldsSelect">Fields:</label>
+                            <div class="fields-container">
+                                <input type="text" id="fieldsInput" class="form-control" 
+                                       placeholder="Type field names or select from dropdown...">
+                                <div class="fields-suggestions" id="fieldsSuggestions"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="whereClause">WHERE Clause (optional):</label>
+                            <input type="text" id="whereClause" class="form-control" 
+                                   placeholder="e.g., Name LIKE '%test%' AND CreatedDate = TODAY">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="limitClause">Limit (optional):</label>
+                            <input type="number" id="limitClause" class="form-control" 
+                                   placeholder="100" value="100" min="1" max="2000">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Query -->
+                <div class="section-card">
+                    <h3>Custom SOQL Query</h3>
+                    <div class="query-editor">
+                        <textarea id="customQuery" class="form-control query-textarea" 
+                                  placeholder="SELECT Id, API_Key__c, Model__c FROM Mindblaze_Settings__c"
+                                  rows="4"></textarea>
+                        <div class="query-actions">
+                            <button id="formatQuery" class="btn btn-secondary">Format</button>
+                            <button id="executeQuery" class="btn btn-primary">Execute Query</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="section-card">
+                    <h3>Results</h3>
+                    <div class="results-header" id="resultsHeader" style="display: none;">
+                        <div class="results-info">
+                            <span id="recordCount">0 records</span>
+                            <span id="executionTime"></span>
+                        </div>
+                        <div class="results-actions">
+                            <button id="exportCsv" class="btn btn-secondary">Export CSV</button>
+                            <button id="exportJson" class="btn btn-secondary">Export JSON</button>
+                            <button id="clearResults" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </div>
+                    
+                    <div class="results-container" id="resultsContainer">
+                        <div class="no-results" id="noResults">
+                            <p>No query executed yet. Use the query builder above or enter a custom SOQL query.</p>
+                        </div>
+                        <div class="loading" id="loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Executing query...</p>
+                        </div>
+                        <div class="error-message" id="errorMessage" style="display: none;"></div>
+                        <div class="results-table-container" id="resultsTableContainer" style="display: none;">
+                            <table id="resultsTable" class="results-table">
+                                <thead id="resultsTableHead"></thead>
+                                <tbody id="resultsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Queries -->
+                <div class="section-card">
+                    <h3>Quick Queries</h3>
+                    <div class="quick-queries">
+                        <button class="quick-query-btn" data-query="SELECT Id, Name FROM User LIMIT 10">Recent Users</button>
+                        <button class="quick-query-btn" data-query="SELECT Id, Name FROM Account LIMIT 10">Recent Accounts</button>
+                        <button class="quick-query-btn" data-query="SELECT Id, Subject FROM Task WHERE CreatedDate = TODAY LIMIT 10">Today's Tasks</button>
+                        <button class="quick-query-btn" data-query="SELECT Id, API_Key__c, Model__c FROM Mindblaze_Settings__c">Mindblaze Settings</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer class="sidebar-footer">
+            <div class="footer-info">
+                <span>SF Data Reader v1.0</span>
+                <a href="#" id="aboutLink">About</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="sidebar.js"></script>
+</body>
+</html>
