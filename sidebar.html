@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salesforce Data Reader</title>
+    <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Salesforce Data Reader</h1>
+        </header>
+        
+        <div class="connection-section">
+            <div class="status-container">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusText">Checking connection...</span>
+            </div>
+            
+            <div class="connection-info" id="connectionInfo" style="display: none;">
+                <p><strong>Instance URL :</strong> <span id="instanceUrl"></span></p>
+                <p><strong>Session ID :</strong> <span id="sessionId"></span></p>
+                <p><strong>Method :</strong> <span id="detectionMethod"></span></p>
+            </div>
+            
+            <div class="auth-message" id="authMessage" style="display: none;">
+                <p>⚠️ API Access Control may be enabled. Please check your Salesforce org settings.</p>
+            </div>
+            
+            <button id="clearSessionBtn" class="btn btn-secondary" style="display: none;">
+                Clear Session
+            </button>
+        </div>
+    </div>
+    
+    <script src="sidebar.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "salesforce-data-reader",
+  "version": "1.0.0",
+  "description": "Chrome extension to read Salesforce data with hot reload development",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@crxjs/vite-plugin": "^2.0.0-beta.18"
+  },
+  "keywords": [
+    "chrome-extension",
+    "salesforce",
+    "soql",
+    "manifest-v3",
+    "hot-reload"
+  ],
+  "author": "Salesforce Data Reader",
+  "license": "MIT"
+}
